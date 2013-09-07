@@ -1,2 +1,3 @@
-/app/code/community/Hackathon/PSR0Autoloader      /app/code/community/Hackathon/PSR0Autoloader
-/app/etc/modules/Hackathon_PSR0Autoloader.xml     /app/etc/modules/Hackathon_PSR0Autoloader.xml
+/app/code/community/Hackathon/PSR0Autoloader /app/code/community/Hackathon/PSR0Autoloader
+/app/etc/modules/Hackathon_PSR0Autoloader.xml /app/etc/modules/Hackathon_PSR0Autoloader.xml
+/shell/autoloader_initializer.php /shell/autoloader_initializer.php
