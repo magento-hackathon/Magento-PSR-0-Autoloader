@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<config>
+	<modules>
+		<Hackathon_PSR0Autoloader>
+			<version>0.0.1</version>
+		</Hackathon_PSR0Autoloader>
+	</modules>
+	<global>
+		<models>
+			<psr0autoloader>
+				<class>Hackathon_PSR0Autoloader_Model</class>
+			</psr0autoloader>
+		</models>
+		<events>
+			<resource_get_tablename>
+				<observers>
+					<psr0autoloader>
+						<class>Hackathon_PSR0Autoloader_Model_Observer</class>
+						<method>addAutoloader</method>
+					</psr0autoloader>
+				</observers>
+			</resource_get_tablename>
+			<add_spl_autoloader>
+				<observers>
+					<psr0autoloader>
+						<class>Hackathon_PSR0Autoloader_Model_Observer</class>
+						<method>addAutoloader</method>
+					</psr0autoloader>
+				</observers>
+			</add_spl_autoloader>
+		</events>
+	</global>
+</config>
