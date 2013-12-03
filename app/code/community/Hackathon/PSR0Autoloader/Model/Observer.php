@@ -16,7 +16,7 @@ class Hackathon_PSR0Autoloader_Model_Observer extends Mage_Core_Model_Observer {
 	}
 
 	public function addAutoloader() {
-		if(self::$shouldAdd){
+		if(!self::$shouldAdd){
 			return;
 		}
 		foreach ($this->getNamespacesToRegister() as $namespace){
