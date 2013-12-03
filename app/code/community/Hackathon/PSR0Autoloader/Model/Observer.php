@@ -4,6 +4,8 @@ class Hackathon_PSR0Autoloader_Model_Observer extends Mage_Core_Model_Observer {
 
 	const CONFIG_PATH_PSR0NAMESPACES = 'global/psr0_namespaces';
 
+	static $shouldAdd = true;
+
 	protected function getNamespacesToRegister(){
 		$namespaces = array();
 		$node = Mage::getConfig()->getNode(self::CONFIG_PATH_PSR0NAMESPACES);
@@ -14,6 +16,9 @@ class Hackathon_PSR0Autoloader_Model_Observer extends Mage_Core_Model_Observer {
 	}
 
 	public function addAutoloader() {
+		if(self::$shouldAdd){
+			return;
+		}
 		foreach ($this->getNamespacesToRegister() as $namespace){
 			if (is_dir(Mage::getBaseDir('lib') . DS . $namespace)){
 				$args = array($namespace, Mage::getBaseDir('lib') . DS . $namespace);
@@ -21,6 +26,7 @@ class Hackathon_PSR0Autoloader_Model_Observer extends Mage_Core_Model_Observer {
 				$autoloader->register();
 			}
 		}
+		self::$shouldAdd = false;
 	}
 
 }
