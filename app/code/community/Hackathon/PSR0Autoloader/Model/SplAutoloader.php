@@ -16,120 +16,121 @@
  * @author Kris Wallsmith <kris.wallsmith@gmail.com>
  * @author Fabien Potencier <fabien.potencier@symfony-project.org>
  */
-class Hackathon_PSR0Autoloader_Model_SplAutoloader extends Mage_Core_Model_Abstract {
+class Hackathon_PSR0Autoloader_Model_SplAutoloader extends Mage_Core_Model_Abstract
+{
 
-	private $_fileExtension = '.php';
-	private $_namespace;
-	private $_includePath;
-	private $_namespaceSeparator = '\\';
+    private $_fileExtension = '.php';
+    private $_namespace;
+    private $_includePath;
+    private $_namespaceSeparator = '\\';
 
-	/**
-	 * Creates a new <tt>SplClassLoader</tt> that loads classes of the
-	 * specified namespace.
-	 *
-	 * @param string $ns The namespace to use.
-	 */
-	public function __construct($ns = null, $includePath = null)
-	{
-		$this->_namespace = $ns;
-		$this->_includePath = $includePath;
-	}
+    /**
+     * Creates a new <tt>SplClassLoader</tt> that loads classes of the
+     * specified namespace.
+     *
+     * @param string $ns The namespace to use.
+     */
+    public function __construct($ns = null, $includePath = null)
+    {
+        $this->_namespace = $ns;
+        $this->_includePath = $includePath;
+    }
 
-	/**
-	 * Sets the namespace separator used by classes in the namespace of this class loader.
-	 *
-	 * @param string $sep The separator to use.
-	 */
-	public function setNamespaceSeparator($sep)
-	{
-		$this->_namespaceSeparator = $sep;
-	}
+    /**
+     * Sets the namespace separator used by classes in the namespace of this class loader.
+     *
+     * @param string $sep The separator to use.
+     */
+    public function setNamespaceSeparator($sep)
+    {
+        $this->_namespaceSeparator = $sep;
+    }
 
-	/**
-	 * Gets the namespace seperator used by classes in the namespace of this class loader.
-	 *
-	 * @return void
-	 */
-	public function getNamespaceSeparator()
-	{
-		return $this->_namespaceSeparator;
-	}
+    /**
+     * Gets the namespace seperator used by classes in the namespace of this class loader.
+     *
+     * @return void
+     */
+    public function getNamespaceSeparator()
+    {
+        return $this->_namespaceSeparator;
+    }
 
-	/**
-	 * Sets the base include path for all class files in the namespace of this class loader.
-	 *
-	 * @param string $includePath
-	 */
-	public function setIncludePath($includePath)
-	{
-		$this->_includePath = $includePath;
-	}
+    /**
+     * Sets the base include path for all class files in the namespace of this class loader.
+     *
+     * @param string $includePath
+     */
+    public function setIncludePath($includePath)
+    {
+        $this->_includePath = $includePath;
+    }
 
-	/**
-	 * Gets the base include path for all class files in the namespace of this class loader.
-	 *
-	 * @return string $includePath
-	 */
-	public function getIncludePath()
-	{
-		return $this->_includePath;
-	}
+    /**
+     * Gets the base include path for all class files in the namespace of this class loader.
+     *
+     * @return string $includePath
+     */
+    public function getIncludePath()
+    {
+        return $this->_includePath;
+    }
 
-	/**
-	 * Sets the file extension of class files in the namespace of this class loader.
-	 *
-	 * @param string $fileExtension
-	 */
-	public function setFileExtension($fileExtension)
-	{
-		$this->_fileExtension = $fileExtension;
-	}
+    /**
+     * Sets the file extension of class files in the namespace of this class loader.
+     *
+     * @param string $fileExtension
+     */
+    public function setFileExtension($fileExtension)
+    {
+        $this->_fileExtension = $fileExtension;
+    }
 
-	/**
-	 * Gets the file extension of class files in the namespace of this class loader.
-	 *
-	 * @return string $fileExtension
-	 */
-	public function getFileExtension()
-	{
-		return $this->_fileExtension;
-	}
+    /**
+     * Gets the file extension of class files in the namespace of this class loader.
+     *
+     * @return string $fileExtension
+     */
+    public function getFileExtension()
+    {
+        return $this->_fileExtension;
+    }
 
-	/**
-	 * Installs this class loader on the SPL autoload stack.
-	 */
-	public function register()
-	{
-		spl_autoload_register(array($this, 'loadClass'),true,true);
-	}
+    /**
+     * Installs this class loader on the SPL autoload stack.
+     */
+    public function register()
+    {
+        spl_autoload_register(array($this, 'loadClass'), true, true);
+    }
 
-	/**
-	 * Uninstalls this class loader from the SPL autoloader stack.
-	 */
-	public function unregister()
-	{
-		spl_autoload_unregister(array($this, 'loadClass'));
-	}
+    /**
+     * Uninstalls this class loader from the SPL autoloader stack.
+     */
+    public function unregister()
+    {
+        spl_autoload_unregister(array($this, 'loadClass'));
+    }
 
-	/**
-	 * Loads the given class or interface.
-	 *
-	 * @param string $className The name of the class to load.
-	 * @return void
-	 */
-	public function loadClass($className)
-	{
-		$className = ltrim($className, '\\');
-		$fileName  = '';
-		if ($lastNsPos = strripos($className, '\\')) {
-			$namespace = substr($className, 0, $lastNsPos);
-			$className = substr($className, $lastNsPos + 1);
-			$fileName  = str_replace('\\', DIRECTORY_SEPARATOR, $namespace) . DIRECTORY_SEPARATOR;
-		}
-		$fileName .= str_replace('_', DIRECTORY_SEPARATOR, $className) . '.php';
+    /**
+     * Loads the given class or interface.
+     *
+     * @param string $className The name of the class to load.
+     * @return void
+     */
+    public function loadClass($className)
+    {
+        $className = ltrim($className, '\\');
+        $fileName = '';
+        if ($lastNsPos = strripos($className, '\\')) {
+            $namespace = substr($className, 0, $lastNsPos);
+            $className = substr($className, $lastNsPos + 1);
+            $fileName = str_replace('\\', DIRECTORY_SEPARATOR, $namespace) . DIRECTORY_SEPARATOR;
+        }
+        $fileName .= str_replace('_', DIRECTORY_SEPARATOR, $className) . '.php';
         $fileName = stream_resolve_include_path($fileName);
         if (false !== $fileName) {
-		    include $fileName;
+            include $fileName;
         }
-	}
+    }
 }
