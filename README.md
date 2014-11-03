@@ -21,3 +21,10 @@ You need to configure the Path to your Vendor directory in your `<global/>`-node
 
     <composer_vendor_path><![CDATA[{{root_dir}}/vendor]]></composer_vendor_path>
 
+
+## disable the default magento autoloader
+
+To disable the default magento autoloader, insert following code in the `<global/>`-node of local.xml:
+
+    
+    <base_autoloader_disable>1</base_autoloader_disable>

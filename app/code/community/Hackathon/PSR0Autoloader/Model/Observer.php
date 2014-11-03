@@ -4,6 +4,7 @@ class Hackathon_PSR0Autoloader_Model_Observer extends Mage_Core_Model_Observer {
 
 	const CONFIG_PATH_PSR0NAMESPACES = 'global/psr0_namespaces';
 	const CONFIG_PATH_COMPOSER_VENDOR_PATH = 'global/composer_vendor_path';
+    const CONFIG_PATH_BASE_AUTOLOADER_DISABLE = 'global/base_autoloader_disable';
 
 	static $shouldAdd = true;
 
@@ -25,6 +26,15 @@ class Hackathon_PSR0Autoloader_Model_Observer extends Mage_Core_Model_Observer {
 		return $path;
 	}
 
+    protected function shouldDisableBaseAutoloader() {
+        $config = Mage::getConfig()->getNode(self::CONFIG_PATH_BASE_AUTOLOADER_DISABLE);
+        if($config && $config != "0" && $config != "false"){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
 	public function addAutoloader() {
 		if(!self::$shouldAdd){
 			return;
@@ -39,6 +49,9 @@ class Hackathon_PSR0Autoloader_Model_Observer extends Mage_Core_Model_Observer {
 		if($composerVendorPath = $this->getComposerVendorPath()){
 			require_once $composerVendorPath . '/autoload.php';
 		}
+        if ($this->shouldDisableBaseAutoloader()) {
+            spl_autoload_unregister(array(Varien_Autoload::instance(), 'autoload'));
+        }
 		self::$shouldAdd = false;
 	}
 
