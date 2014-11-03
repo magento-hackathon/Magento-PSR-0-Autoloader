@@ -49,7 +49,7 @@ class Hackathon_PSR0Autoloader_Model_SplAutoloader extends Mage_Core_Model_Abstr
     /**
      * Gets the namespace seperator used by classes in the namespace of this class loader.
      *
-     * @return void
+     * @return string
      */
     public function getNamespaceSeparator()
     {
