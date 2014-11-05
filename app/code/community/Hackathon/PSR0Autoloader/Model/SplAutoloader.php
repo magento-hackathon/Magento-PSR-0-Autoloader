@@ -130,7 +130,7 @@ class Hackathon_PSR0Autoloader_Model_SplAutoloader extends Mage_Core_Model_Abstr
         $fileName .= str_replace('_', DIRECTORY_SEPARATOR, $className) . '.php';
         $fileName = stream_resolve_include_path($fileName);
         if (false !== $fileName) {
-            include $fileName;
+            include_once $fileName;
         }
     }
 }
