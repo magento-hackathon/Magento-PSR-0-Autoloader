@@ -9,6 +9,6 @@ before_install:
   - mkdir test-root/
 before_script:
   - CURR_DIR=$(pwd)
-  - bin/mage-ci install test $MAGENTO magento_test -c -t -r http://mage-ci.ecomdev.org
+  - vendor/bin/mage-ci install test $MAGENTO magento_test -c -t -r http://mage-ci.ecomdev.org
 script:
   - vendor/bin/phpunit
