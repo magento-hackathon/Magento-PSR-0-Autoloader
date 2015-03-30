@@ -12,6 +12,14 @@
 			</psr0autoloader>
 		</models>
 		<events>
+			<core_collection_abstract_load_before>
+				<observers>
+					<psr0autoloader>
+						<class>Hackathon_PSR0Autoloader_Model_Observer</class>
+						<method>addAutoloader</method>
+					</psr0autoloader>
+				</observers>
+			</core_collection_abstract_load_before>
 			<resource_get_tablename>
 				<observers>
 					<psr0autoloader>
