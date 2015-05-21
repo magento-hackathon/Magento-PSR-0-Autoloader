@@ -1,6 +1,6 @@
 {
     "name": "firegento/psr0autoloader",
-    "license": "GPL-3.0",
+    "licenses": ["MIT", "GPL-3.0"],
     "type": "magento-module",
     "description": "This extension adds a PSR-0 autoloader before the Varien autoloader",
     "authors":[
